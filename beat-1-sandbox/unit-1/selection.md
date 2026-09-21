@@ -12,7 +12,6 @@ https://github.com/codepath/pathreview-ai301-fa26-s1/issues/51
 
 **Verdict output**
 
-```
 Live-mode verdict for #51. Accepted (also considered: #68 BM25 empty-index, #61 SQLAlchemy text() fix, #72 verify_password; all accepted, #51 chosen for strongest DB-internals fit).
 
 ```json
@@ -34,7 +33,6 @@ Live-mode verdict for #51. Accepted (also considered: #68 BM25 empty-index, #61 
   ],
   "verdict": "accept"
 }
-```
 ```
 
 ---
