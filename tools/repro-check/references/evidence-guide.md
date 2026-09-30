@@ -16,7 +16,7 @@ The record names the tool or library version and the OS. Either the versions mat
 - Live mode: the same section of the draft; cross-check the issue's original steps if the reporter gave any.
 
 **What good looks like.**
-Someone starting from a clean checkout could run the steps and hit the same failing behavior. Install and setup commands are included, commands are exact (not "run the build"), and any input file or config is shown in full or linked.
+Someone starting from a clean checkout, reading only the report (not the issue thread), could run the steps and hit the same failing behavior. Install and setup commands are included, commands are exact (not "run the build"), and any input file or config is either shown in full or specified precisely enough (exact fields, values, and shape) that a reader could reconstruct it without inventing content.
 
 ## Behavior shown
 
