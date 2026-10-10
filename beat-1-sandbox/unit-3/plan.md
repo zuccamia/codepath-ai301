@@ -59,4 +59,9 @@ Before / after snapshots go under Evidence in `plan-and-implement.md` after the 
 
 ## Deviations
 
-Nothing changed; the plan held. Script and CI job landed as described, and the test plan produced the predicted results: exit 1 with the expected `ProgrammingError` when `003_broken_demo.py` was present, exit 0 after removal, and the `uq_users_email` drift did not fail the script.
+The plan held on scope and approach. Two small additions landed that the plan did not name:
+
+- `cache: pip` on the `setup-python@v5` step in the new CI job, to speed up installs.
+- A guard in `scripts/validate_migrations.sh` that exits 1 with "DATABASE_URL is not set" when the variable is missing, so the script fails clearly instead of alembic falling back to a default.
+
+The test plan produced the predicted results: exit 1 with the expected `ProgrammingError` when `003_broken_demo.py` was present, exit 0 after removal, and the `uq_users_email` drift did not fail the script.

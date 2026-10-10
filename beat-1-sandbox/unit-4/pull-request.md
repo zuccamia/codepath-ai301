@@ -15,15 +15,11 @@ label is not graded.
 
 **Pull request**
 
-[Link to the pull request you opened. It must be the pull request's own page on the Path
-Review repo, not your fork's branch page.]
+https://github.com/codepath/pathreview-ai301-fa26-s1/pull/124
 
 **Branch**
 
-[The name of the branch the pull request comes from, exactly as it appears in your fork.
-The naming shape is a type prefix, then the issue number, then a short description. **The
-issue number in the branch name must be the number of the issue the pull request fixes** —
-a name carrying any other number does not satisfy this field.]
+`feat/51-validate-migrations`
 
 ## Eval iterations
 
@@ -32,28 +28,29 @@ fields.
 
 **Run history**
 
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
+1. Full: 19/20 (missed pkg-16).
+2. Full: 15/20. I only removed the instruction comments from my files. Five clear-accepts failed on `tested`.
+3. Partial (9 packages): 9/9 after loosening `tested`.
+4. Full: 20/20.
+5. Full: 20/20, after a wording cleanup in SKILL.md and procedure.md.
+6. Full: 20/20, after rewording the live-mode inputs in SKILL.md.
+7. Full: 20/20, after removing the house-chain lines from SKILL.md. Matches `eval-run.txt`.
 
 **Package analysis**
 
-[Pick one scored package (`pkg-01` through `pkg-20` — the four `calib-` packages are never
-scored). Name it by id, say what your rubric decided and what the gold label said, and
-explain why your rubric read it that way.]
+`pkg-05`. My rubric: accept. Gold: accept. It touches only the files the plan names, and the description matches the diff. The tests are reported as "`cargo test -p nu-protocol` passes (312 tests)" with no pasted output. A stated result that nothing contradicts passes `tested`. My first rubric rejected it for that.
 
 **Check rationale**
 
-[Quote one check from the `rubric.md` you uploaded to `tools/pr-precheck/`, exactly as it reads now.
-Then say why it reads that way — what you revised to get there, or what you rejected in
-favour of it.]
+> | tested | the test evidence read against the plan's test plan and the repro steps | all hold: (a) the repro steps are re-run with an observable before and after; (b) the repo's own checks or test suite are reported with a stated outcome (a one-line result such as "suite passes" counts; pasted output is not required; a failure reported honestly with its reason counts; checks never mentioned, or a result the evidence contradicts, fail); (c) the evidence names a specific observable, not just "tests pass" | required |
+
+My first version required pasted output for the repo's checks. That rejected five clear-accepts, so I accepted a stated result and kept the fail for checks never mentioned or contradicted.
+
+Finding: removing the instruction comments looked harmless but changed the score, from 19/20 to 15/20. The harness puts each file in the prompt with comments included. The comments held a rule that an honest shortfall can pass, so I put that rule in the rubric itself. I did not test whether the comments or run-to-run variance caused the drop.
 
 **Trade-offs**
 
-[Every check gives something up. Any one of these is a complete answer: a package whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
+The loosened check can miss a PR that falsely claims "tests pass" when nothing contradicts it. I re-ran pkg-04, 07, 10 and 14 (not-tested) as canaries and all still reject.
 
 ---
 
