@@ -55,10 +55,24 @@ happened; these entries are the toolkit's own timeline.
 All four entries are graded. Keep every heading below, and fill each
 one in the week it belongs to.
 
-**Unit 5: [one line on the tool work]**
+**Unit 5: Built issue-scout's search step, then fixed its ranking twice**
 
-[2-4 sentences: what you built (the scout, your strategy), what broke
-or fell short, what changed because of it.]
+My Unit 1 skill only graded issues I handed it, so I gave it a search
+step: `gh search issues` queries from my fit profile (C++, Rust, Ruby,
+and Go, on database and indexing work) and ranking rules that pick the
+top 5 to grade with my Unit 1 rubric. The first scan (2026-10-21)
+accepted mar123io/sonora#3 and #2, the same issue filed twice in a
+0-star repo where no issue had ever gotten a reply, so I added a
+10-star floor (a `gh api` lookup per repo, since `gh search issues` has
+no stars filter), a rule that drops duplicate titles, and made
+multi-query matches only a tie-break. The re-scan on 2026-10-22 dropped
+sonora but filled the top 5 with UI panels and game audio, because one
+keyword like "index" matches almost anything, so I added storage,
+search, and vector queries, dropped frontend words in titles, and
+ranked titles with a fit term first. The next scan's top 5 were all
+search, storage, or database work, and I also tightened the rubric's
+triage-label check back to my Unit 1 rule after loosening it to reuse
+the rubric in another tool of mine.
 
 **Unit 6: [one line on the tool work]**
 
