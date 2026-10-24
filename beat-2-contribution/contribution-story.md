@@ -109,10 +109,17 @@ description before opening PR #27, so I re-ran the gate on the text as
 shipped, and it passed again, with the same voice note that my AI
 disclosure should say what I checked myself.
 
-**Unit 8: [one line on the tool work]**
+**Unit 8: Installed the PR-monitor and wrote a playbook from octoweb's own rhythm**
 
-[2-4 sentences: the PR-monitor and your playbook. What it read, what it
-drafted, what you did with the draft.]
+I installed the PR-monitor and ran its free state check, which found
+PR #27 quiet, with no CI run yet and merge state UNSTABLE, then wrote my
+playbook from the repo's history: its one outside PR merged in 12
+hours, but the maintainer once went 25 days without merging anything,
+so my first-response threshold is 7 days, which is also my voice
+guide's floor for a ping. The full run drafted a wait note instead of a
+nudge, quoting that threshold, and it read the missing CI run the way my
+playbook says (expected for a first-time fork PR, not a reason to
+nudge), so I posted nothing and will re-run it on or after 2026-10-30.
 
 ---
 
@@ -468,25 +475,60 @@ and the fix.
 
 **Technical Skills Gained**
 
-[What you learned technically, named concretely.]
+- How an inverted index stays consistent: every place a document leaves
+  `docs` has to undo what indexing added to the posting lists, or the
+  index keeps dead ids that its own search quietly filters out.
+- Rust ownership in practice: moving a value into a collection versus
+  borrowing it, the borrow checker ending a borrow at its last use, and
+  why a method taking `&mut self` cannot run while an iterator still
+  borrows one of `self`'s fields.
+- The standard collection APIs the fix needed: `BTreeMap::get_mut`,
+  `entry`, `remove`, `Vec::retain`, `remove`, and `extract_if`, and that
+  `extract_if` removes items only as it is iterated.
+- Committing only some of a file's changes with `git add -p`: staging
+  hunk by hunk (`y`, `n`, `s` to split) let me turn one mixed set of
+  edits into a tests-only commit and a fix commit.
+- Toolchain and platform details: replacing a broken Homebrew Rust with
+  rustup, and that macOS 26 drops the quarantine agent name for non-app
+  processes.
 
 **Challenges Overcome**
 
-[What was hard and how you solved it; point at the real events, the
-Toolkit blocks above are full of them.]
+- My first pick, sonic#394, was taken by a suspended contributor that no
+  API could show me; asking in my claim surfaced it within hours, and I
+  released it and re-picked.
+- My first test assertions passed when they should have failed (a
+  missing `!`), and my first fix removed every other page (`!=` copied
+  from `retain` into `extract_if`). The maintainer's existing tests
+  caught the second one at once.
+- A failing test on `master` that I first blamed on Claude Code's
+  sandbox; I proved that wrong by running it outside the sandbox and
+  with a plain Swift script.
+- Keeping the issue's rule that a human writes the fix: I asked for
+  syntax on unrelated examples and wrote the tests and the fix myself.
 
 **What I'd Do Differently Next Time**
 
-[Reflection on your process.]
+- Read the whole thread and ask about any earlier attempt before
+  building a reproduction; on sonic I built a timing harness before the
+  maintainer told me the issue was taken.
+- Do the course's ask-before-claiming step before posting the claim,
+  not after.
+- Check that an edit is saved, and run `git diff`, before every commit;
+  my `terms` comment update was never in the file, and only a rubric
+  read of the PR draft caught it.
+- Re-run the gate after the last wording edit, not before it.
 
 ---
 
 ## Resources Used
 
-[What actually helped, not a reading list. List things this story
-already shows you using: the doc you followed to set the environment
-up, the thread that explained the bug, the person who answered you.
-One real entry beats ten plausible ones.]
-
-- [Link to documentation that helped]
-- [Discussion, issue, or post that helped]
+- Muvon/octoweb#21, the issue itself: its Where, Fix, Tests, and Out of
+  scope sections were the plan, and its closing paragraph set the rules
+  (https://github.com/Muvon/octoweb/issues/21).
+- octoweb's `.github/workflows/ci.yml`, for the exact test command CI
+  runs and the macos-15 runner it runs on.
+- The Rust standard library docs for `BTreeMap`
+  (https://doc.rust-lang.org/std/collections/struct.BTreeMap.html) and
+  `Vec::extract_if`
+  (https://doc.rust-lang.org/std/vec/struct.Vec.html#method.extract_if).
