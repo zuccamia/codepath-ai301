@@ -119,7 +119,13 @@ so my first-response threshold is 7 days, which is also my voice
 guide's floor for a ping. The full run drafted a wait note instead of a
 nudge, quoting that threshold, and it read the missing CI run the way my
 playbook says (expected for a first-time fork PR, not a reason to
-nudge), so I posted nothing and will re-run it on or after 2026-10-30.
+nudge), so I posted nothing. The PR was merged two days later, and the
+next run, in the MERGED state, drafted a short thanks that also asked
+to close #21 and repeated a CI failure I had already reported; #21 had
+closed itself on merge and donk8r had already written "All good", so I
+posted nothing again. The loop still open is the history-removal bug I
+reported on #21, which got no reply, and that belongs in a new issue,
+not on a closed thread.
 
 ---
 
@@ -262,6 +268,9 @@ with Homebrew's rustup and put its keg-only `bin` on my PATH.
 **Reproduction Evidence**
 
 - **Commit showing reproduction:** https://github.com/zuccamia/octoweb/commit/9e94008591e47b55610c7843ee729fa6365783e6
+  (the tests-only commit as first pushed, on top of `9257131`; after I
+  rebased the PR onto upstream's Clippy fix it became `017576e`, and this
+  original still opens on GitHub)
 - **Screenshots/logs:**
 
   ```text
@@ -417,6 +426,18 @@ and lost the `terms` comment update along the way (it had never actually
 been saved), which a rubric read of the PR draft caught before I opened
 the PR.
 
+**2026-10-24**
+
+Upstream fixed the Clippy errors on `master` in `d303fdb`, so I rebased
+the PR onto it (the commits became `017576e` and `9919c6c`) and said so
+on the PR. A "PR Brief" CI check still failed; I think it is unrelated to
+this change and said I had not found the cause.
+
+**2026-10-25**
+
+donk8r wrote "Thanks for PR! All good" and squash-merged it as
+`53a5516`; `Closes #21` closed the issue at the same moment.
+
 **Toolkit**
 
 - Tool: Claude Code as an explainer and reviewer, inside the issue's
@@ -449,10 +470,13 @@ and the fix.
 **Maintainer Feedback:**
 
 - 2026-10-23: none yet on the PR. On the issue, donk8r replied "Feel
-  free to take it" and assigned me. Upstream CI has not run on the PR
-  yet; it is a first-time contributor's fork PR.
+  free to take it" and assigned me.
+- 2026-10-24: no review comments. Upstream fixed the Clippy errors in
+  `d303fdb`; I rebased onto it and noted a "PR Brief" check failure I
+  think is unrelated.
+- 2026-10-25: donk8r: "Thanks for PR! All good", then merged it.
 
-**Status:** Awaiting review (opened 2026-10-23).
+**Status:** Merged (2026-10-25, squash commit `53a5516`; #21 closed).
 
 **Toolkit**
 
@@ -466,8 +490,8 @@ and the fix.
   words of the description after the gate passed, so what I shipped was
   not exactly what it had read.
 - What changed: I re-ran the gate on the description as shipped, and it
-  passed again; the remaining voice note (say what I checked myself) is
-  a wording change I can still make on the PR.
+  passed again. I did not act on its remaining voice note (say what I
+  checked myself in the AI section) before the PR was merged.
 
 ---
 
